@@ -1,3 +1,10 @@
+
+HOLD_STOCK_DAY_AMOUNT = 1 # Starts at 0 (2 is three days)
+STOPLOSS = 1 # 12.5 == 8% & 50 == 2%
+
+# Best hold day amount 1, second 0 (worst was 4 = -200 and best was 14 = 716)
+# Best stop loss 12.5, second 14.285
+
 import os
 if os.name == 'nt':
     os.system('cls')
@@ -60,7 +67,6 @@ def stock_close_change_dates(stock, start_date, end_date):
     """Gets change (%) of stock change between close of start_date and close of end_date"""
     return (float(stock.loc[[end_date]]['Close']) - float(stock.loc[[start_date]]['Close'])) / float(stock.loc[[start_date]]['Close']) * 100
 
-STOPLOSS = 12.5
 def calculate_current_procent_price(stock, date):
     return float(stock.loc[[date]]['Close']) / STOPLOSS
 
@@ -78,15 +84,13 @@ def stop_loss(position, stock, start_date, end_date):
 
 def save_results(symbol, result):
     with open("results.json", "r") as f:
-        data = json.loads(f.read()) 
+        data = json.loads(f.read())
         data[symbol] = result
         f.close()
 
     with open("results.json", "w") as f:
         json.dump(data, f, indent=4)
         f.close()
-
-HOLD_STOCK_DAY_AMOUNT = 1 # Starts at 0 (2 is three days)
 
 if __name__ == '__main__':
     #stock = yf.download(tickers = "CCEP", period = "3y", interval = "1d", prepost = False, repair = True)
@@ -99,6 +103,8 @@ if __name__ == '__main__':
     with open("stock_earnings.json", "r") as f:
         stock_earnings = json.loads(f.read())
         f.close()
+
+    #tmp_i = 0
 
     for symbol in stock_earnings:
         total_profit = 0.00
@@ -115,7 +121,7 @@ if __name__ == '__main__':
                 _stop_loss = stop_loss("long", stock, add_days_to_date(date=date, days=-1), add_days_to_date(date=date, days=HOLD_STOCK_DAY_AMOUNT))
                 if _stop_loss is not None:
                     total_profit += _stop_loss
-                    print("date: " + date + " - stoploss: " + str(_stop_loss))
+                    #print("date: " + date + " - stoploss: " + str(_stop_loss))
                     continue
             except Exception:
                 pass
@@ -123,12 +129,16 @@ if __name__ == '__main__':
             try:
                 profit = stock_close_change_dates(stock, add_days_to_date(date=date, days=-1), add_days_to_date(date=date, days=HOLD_STOCK_DAY_AMOUNT))
                 total_profit += profit
-                print("date: " + date + " - profit: " + str(profit))
+                #print("date: " + date + " - profit: " + str(profit))
             except Exception:
                 pass
         profits[symbol] = total_profit
         save_results(symbol, total_profit)
         print(symbol + ": " + str(profits[symbol]))
+
+        #tmp_i += 1
+        #if tmp_i == 100:
+        #    break
 
     #print("total profit: " + str(total_profit))
     
