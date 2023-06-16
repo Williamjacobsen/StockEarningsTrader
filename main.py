@@ -60,7 +60,7 @@ def stock_close_change_dates(stock, start_date, end_date):
     """Gets change (%) of stock change between close of start_date and close of end_date"""
     return (float(stock.loc[[end_date]]['Close']) - float(stock.loc[[start_date]]['Close'])) / float(stock.loc[[start_date]]['Close']) * 100
 
-STOPLOSS = 33
+STOPLOSS = 12.5
 def calculate_current_procent_price(stock, date):
     return float(stock.loc[[date]]['Close']) / STOPLOSS
 
