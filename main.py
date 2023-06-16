@@ -60,12 +60,21 @@ def stock_close_change_dates(stock, start_date, end_date):
     """Gets change (%) of stock change between close of start_date and close of end_date"""
     return (float(stock.loc[[end_date]]['Close']) - float(stock.loc[[start_date]]['Close'])) / float(stock.loc[[start_date]]['Close']) * 100
 
+STOPLOSS = 33
 def calculate_current_procent_price(stock, date):
-    return float(stock.loc[[date]]['Close']) / 100
+    return float(stock.loc[[date]]['Close']) / STOPLOSS
 
 def stop_loss(position, stock, start_date, end_date):
-    if position == "long":
-        pass # go through each day see if low is lower than one procent
+    end_date_reached = False
+    i = 1
+    while not end_date_reached:
+        cur_date = add_days_to_date(date=start_date, days=i)
+        if position == "long":
+            if float(stock.loc[[date]]['Close']) - calculate_current_procent_price(stock, cur_date) > float(stock.loc[[cur_date]]['Low']):
+                return int(-(100/STOPLOSS))
+        i += 1
+        if end_date == cur_date:
+            return None
 
 def save_results(symbol, result):
     with open("results.json", "r") as f:
@@ -76,6 +85,8 @@ def save_results(symbol, result):
     with open("results.json", "w") as f:
         json.dump(data, f, indent=4)
         f.close()
+
+HOLD_STOCK_DAY_AMOUNT = 1 # Starts at 0 (2 is three days)
 
 if __name__ == '__main__':
     #stock = yf.download(tickers = "CCEP", period = "3y", interval = "1d", prepost = False, repair = True)
@@ -101,9 +112,18 @@ if __name__ == '__main__':
             #date = convert_date("Mar 04, 2021")
 
             try:
-                profit = stock_close_change_dates(stock, add_days_to_date(date=date, days=-1), add_days_to_date(date=date, days=1))
+                _stop_loss = stop_loss("long", stock, add_days_to_date(date=date, days=-1), add_days_to_date(date=date, days=HOLD_STOCK_DAY_AMOUNT))
+                if _stop_loss is not None:
+                    total_profit += _stop_loss
+                    print("date: " + date + " - stoploss: " + str(_stop_loss))
+                    continue
+            except Exception:
+                pass
+
+            try:
+                profit = stock_close_change_dates(stock, add_days_to_date(date=date, days=-1), add_days_to_date(date=date, days=HOLD_STOCK_DAY_AMOUNT))
                 total_profit += profit
-                #print("profit: " + str(profit))
+                print("date: " + date + " - profit: " + str(profit))
             except Exception:
                 pass
         profits[symbol] = total_profit
