@@ -1,5 +1,5 @@
 HOLD_STOCK_DAY_AMOUNT = 1
-STOPLOSS = 5
+STOPLOSS = 4
 
 import os
 if os.name == 'nt':
@@ -95,8 +95,22 @@ class analysis_utilities():
 
     def calculate_current_procent_price(self, start_date):
         return float(self.stock.loc[[start_date]]['Close']) / 100
+    
+    def stop_loss(self, start_date, end_date):
+        cur_date = handle_dates().add_days_to_date(start_date, 0)
 
-if __name__ == '__main__':
+        start_price = float(self.stock.loc[[start_date]]['Close'])
+        stop_loss_value = start_price - (self.calculate_current_procent_price(start_date) * STOPLOSS)
+
+        while cur_date != end_date:
+            cur_date = handle_dates().add_days_to_date(cur_date, 1)
+            low = float(self.stock.loc[[cur_date]]['Low'])
+
+            if low < stop_loss_value:
+                return -STOPLOSS
+        return False
+
+def backtest_strategy():
     earnings_data = handle_json().read_earning_dates()
     
     for symbol in earnings_data:
@@ -106,8 +120,22 @@ if __name__ == '__main__':
         for date in earnings_data[symbol]:
             date = handle_dates().convert_date(date)
 
+            #start_date = handle_dates().add_days_to_date(date, 0)
+            #end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT + 1)
+            start_date = handle_dates().add_days_to_date(date, -1)
+            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT)
+
             try:
-                result = analysis_utilities(stock).stock_close_change_dates(start_date=handle_dates().add_days_to_date(date, -1), end_date=handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT))
+                stop_loss = analysis_utilities(stock).stop_loss(start_date, end_date)
+                if stop_loss != False:
+                    total_stock_result += stop_loss
+                    print("date: " + date + " - stop loss: " + str(stop_loss))
+                    continue
+            except Exception as e:
+                pass
+
+            try:
+                result = analysis_utilities(stock).stock_close_change_dates(start_date, end_date)
                 total_stock_result += result
                 print("date: " + date + " - result: " + str(result))
             except Exception as e:
@@ -116,111 +144,5 @@ if __name__ == '__main__':
         handle_json().save_results(symbol, total_stock_result)
         print(symbol + ": " + str(total_stock_result))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#def calculate_current_procent_price(stock, date):
-#    return float(stock.loc[[date]]['Close']) / STOPLOSS
-#
-#def stop_loss(position, stock, start_date, end_date):
-#    end_date_reached = False
-#    i = 1
-#    while not end_date_reached:
-#        cur_date = handle_dates().add_days_to_date(start_date, i)
-#        if position == "long":
-#            if float(stock.loc[[date]]['Close']) - calculate_current_procent_price(stock, cur_date) > float(stock.loc[[cur_date]]['Low']):
-#                return int(-(100/STOPLOSS))
-#        i += 1
-#        if end_date == cur_date:
-#            return None
-
-#def save_results(symbol, result):
-#    with open("results.json", "r") as f:
-#        data = json.loads(f.read())
-#        data[symbol] = result
-#        f.close()
-#
-#    with open("results.json", "w") as f:
-#        json.dump(data, f, indent=4)
-#        f.close()
-
-#if __name__ == '__main__':
-#    #stock = yf.download(tickers = "CCEP", period = "3y", interval = "1d", prepost = False, repair = True)
-#    #stock = stock.reset_index()
-#
-#    #total_profit = 0.00
-#
-#    profits = {}
-#
-#    with open("stock_earnings.json", "r") as f:
-#        stock_earnings = json.loads(f.read())
-#        f.close()
-#
-#    #tmp_i = 0
-#
-#    for symbol in stock_earnings:
-#        total_profit = 0.00
-#
-#        stock = yf.download(tickers = symbol, period = "3y", interval = "1d", prepost = False, repair = True)
-#
-#        dates = stock_earnings[symbol]
-#        #dates = []
-#        for date in dates:
-#            date = handle_dates().convert_date(date)
-#            #date = convert_date("Mar 04, 2021")
-#
-#            try:
-#                _stop_loss = stop_loss("long", stock, handle_dates().add_days_to_date(date, -1), handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT))
-#                if _stop_loss is not None:
-#                    total_profit += _stop_loss
-#                    print("date: " + date + " - stoploss: " + str(_stop_loss))
-#                    continue
-#            except Exception:
-#                pass
-#
-#            try:
-#                profit = stock_close_change_dates(stock, handle_dates().add_days_to_date(date, -1), handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT))
-#                total_profit += profit
-#                print("date: " + date + " - profit: " + str(profit))
-#            except Exception:
-#                pass
-#        profits[symbol] = total_profit
-#        save_results(symbol, total_profit)
-#        print(symbol + ": " + str(profits[symbol]))
-#
-#        #tmp_i += 1
-#        #if tmp_i == 100:
-#        #    break
-#
-#    #print("total profit: " + str(total_profit))
-
-
-
-
+if __name__ == '__main__':
+    backtest_strategy()
