@@ -115,8 +115,10 @@ def backtest_strategy():
     
     for symbol in earnings_data:
         stock = yf.download(tickers = symbol, period = "3y", interval = "1d", prepost = False, repair = True)
-        total_stock_result = 0.00
         
+        total_stock_result = 0.00
+        trades = []
+
         for date in earnings_data[symbol]:
             date = handle_dates().convert_date(date)
 
@@ -129,6 +131,7 @@ def backtest_strategy():
                 stop_loss = analysis_utilities(stock).stop_loss(start_date, end_date)
                 if stop_loss != False:
                     total_stock_result += stop_loss
+                    trades.append(stop_loss)
                     print("date: " + date + " - stop loss: " + str(stop_loss))
                     continue
             except Exception as e:
@@ -137,11 +140,12 @@ def backtest_strategy():
             try:
                 result = analysis_utilities(stock).stock_close_change_dates(start_date, end_date)
                 total_stock_result += result
+                trades.append(result)
                 print("date: " + date + " - result: " + str(result))
             except Exception as e:
                 pass
         
-        handle_json().save_results(symbol, total_stock_result)
+        handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
         print(symbol + ": " + str(total_stock_result))
 
 if __name__ == '__main__':
