@@ -25,5 +25,5 @@ if __name__ == '__main__':
     print(f"Win Rate (%): {_win_rate}")
     print(f"Wins: {wins}")
     print(f"Lost: {lost}")
-    print(f"Total trades: {wins + lost}")
+    print(f"Total stocks traded: {wins + lost}")
     print(f"Profit (%): {profit}")
