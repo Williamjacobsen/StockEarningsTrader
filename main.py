@@ -1,6 +1,3 @@
-HOLD_STOCK_DAY_AMOUNT = 1
-STOPLOSS = 4
-
 import os
 if os.name == 'nt':
     os.system('cls')
@@ -110,11 +107,17 @@ class analysis_utilities():
                 return -STOPLOSS
         return False
 
+def settings():
+    with open('settings.json') as f:
+        _settings = json.loads(f.read())
+        f.close()
+    return _settings["HOLD_STOCK_DAY_AMOUNT"], _settings["STOPLOSS"], _settings["LOGGING"]
+
 def backtest_strategy():
     earnings_data = handle_json().read_earning_dates()
     
     for symbol in earnings_data:
-        stock = yf.download(tickers = symbol, period = "3y", interval = "1d", prepost = False, repair = True)
+        stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
         
         total_stock_result = 0.00
         trades = []
@@ -132,7 +135,7 @@ def backtest_strategy():
                 if stop_loss != False:
                     total_stock_result += stop_loss
                     trades.append(stop_loss)
-                    print("date: " + date + " - stop loss: " + str(stop_loss))
+                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
                     continue
             except Exception as e:
                 pass
@@ -141,12 +144,14 @@ def backtest_strategy():
                 result = analysis_utilities(stock).stock_close_change_dates(start_date, end_date)
                 total_stock_result += result
                 trades.append(result)
-                print("date: " + date + " - result: " + str(result))
+                print("date: " + date + " - result: " + str(result)) if LOGGING else None
             except Exception as e:
                 pass
         
         handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
-        print(symbol + ": " + str(total_stock_result))
+        print(symbol + ": " + str(total_stock_result)) if LOGGING else None
 
 if __name__ == '__main__':
+    HOLD_STOCK_DAY_AMOUNT, STOPLOSS, LOGGING = settings()
+
     backtest_strategy()
