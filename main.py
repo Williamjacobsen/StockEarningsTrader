@@ -1,9 +1,4 @@
 import os
-if os.name == 'nt':
-    os.system('cls')
-else:
-    os.system('clear')
-
 import yfinance as yf
 import pandas as pd
 import json
@@ -153,5 +148,11 @@ def backtest_strategy():
 
 if __name__ == '__main__':
     HOLD_STOCK_DAY_AMOUNT, STOPLOSS, LOGGING = settings()
+
+    if LOGGING:
+        if os.name == 'nt':
+            os.system('cls')
+        else:
+            os.system('clear')
 
     backtest_strategy()

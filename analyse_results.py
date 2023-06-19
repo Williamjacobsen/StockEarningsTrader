@@ -1,6 +1,7 @@
 import json
-
 import os
+import time
+
 if os.name == 'nt':
     os.system('cls')
 else:
@@ -54,9 +55,54 @@ def analysis(logging=True):
         print(f"total_lost: {total_lost}")
         print("")
         print(f"profit: {_profit}%")
+        print(f"profit per trade: {round(_profit/total_trades, 2)}%")
+    return {
+        "stock_win_rate": _stock_win_rate, 
+        "stock_trades": stock_trades, 
+        "stock_wins": stock_wins, 
+        "stock_lost": stock_lost,
+        "total_win_rate": _total_win_rate,
+        "total_trades": total_trades,
+        "total_wins": total_wins,
+        "total_lost": total_lost,
+        "profit": _profit,
+        "profit per trade": round(_profit/total_trades, 2)
+    }
+
+def save_settings_result(result, stoploss, hold_stock_day_amount):
+    with open("settings_result.json", "r") as f:
+        data = json.loads(f.read())
+        data["Buy before earnings report"][f"'STOPLOSS': {stoploss}, 'HOLD_STOCK_DAY_AMOUNT': {hold_stock_day_amount}"] = result
+        f.close()
+
+    with open("settings_result.json", "w") as f:
+        json.dump(data, f, indent=4)
+        f.close()
+
+def change_settings(stoploss, hold_stock_day_amount):
+    with open("settings.json", "r") as f:
+        data = json.loads(f.read())
+        data["STOPLOSS"] = stoploss
+        data["HOLD_STOCK_DAY_AMOUNT"] = hold_stock_day_amount
+        f.close()
+
+    with open("settings.json", "w") as f:
+        json.dump(data, f, indent=4)
+        f.close()
 
 def optimize_settings():
-    pass
+    for hold_stock_day_amount in range(0, 1):
+        for stoploss in range(1, 8):
+            stoploss = stoploss / 10
+            change_settings(stoploss, hold_stock_day_amount)
+            time.sleep(1)
+            print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
+            os.system('python main.py')
+            time.sleep(1)
+            result = analysis(False)
+            time.sleep(1)
+            save_settings_result(result, stoploss, hold_stock_day_amount)
+
 
 if __name__ == '__main__':
-    analysis(logging=False)
+    optimize_settings()

@@ -1,5 +1,5 @@
 {
-  "HOLD_STOCK_DAY_AMOUNT": 1,
-  "STOPLOSS": 4,
+  "HOLD_STOCK_DAY_AMOUNT": 0,
+  "STOPLOSS": 0.1,
   "LOGGING": false
 }
