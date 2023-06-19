@@ -81,9 +81,9 @@ class analysis_utilities():
     def __init__(self, stock):
         self.stock = stock
 
-    def stock_close_change_dates(self, start_date, end_date):
+    def stock_change_dates(self, start_stick, end_stick, start_date, end_date):
         """Gets change (%) of stock change between close of start_date and close of end_date"""
-        return (float(self.stock.loc[[end_date]]['Close']) - float(self.stock.loc[[start_date]]['Close'])) / float(self.stock.loc[[start_date]]['Close']) * 100
+        return (float(self.stock.loc[[end_date]][end_stick]) - float(self.stock.loc[[start_date]][start_stick])) / float(self.stock.loc[[start_date]][start_stick]) * 100
 
     def calculate_current_procent_price(self, start_date):
         return float(self.stock.loc[[start_date]]['Close']) / 100
@@ -97,9 +97,13 @@ class analysis_utilities():
         while cur_date != end_date:
             cur_date = handle_dates().add_days_to_date(cur_date, 1)
             low = float(self.stock.loc[[cur_date]]['Low'])
-
+            _open = float(self.stock.loc[[cur_date]]['Open'])
+            
             if low < stop_loss_value:
+                if _open < stop_loss_value:
+                    return self.stock_change_dates('Close', 'Open', start_date, cur_date)
                 return -STOPLOSS
+
         return False
 
 def settings():
@@ -136,7 +140,7 @@ def backtest_strategy():
                 pass
 
             try:
-                result = analysis_utilities(stock).stock_close_change_dates(start_date, end_date)
+                result = analysis_utilities(stock).stock_change_dates('Close', 'Close', start_date, end_date)
                 total_stock_result += result
                 trades.append(result)
                 print("date: " + date + " - result: " + str(result)) if LOGGING else None

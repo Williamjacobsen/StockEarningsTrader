@@ -91,17 +91,26 @@ def change_settings(stoploss, hold_stock_day_amount):
         f.close()
 
 def optimize_settings():
-    for hold_stock_day_amount in range(0, 1):
-        for stoploss in range(1, 8):
-            stoploss = stoploss / 10
-            change_settings(stoploss, hold_stock_day_amount)
-            time.sleep(1)
-            print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
-            os.system('python main.py')
-            time.sleep(1)
-            result = analysis(False)
-            time.sleep(1)
-            save_settings_result(result, stoploss, hold_stock_day_amount)
+    hold_stock_day_amount = 0
+    #for stoploss in range(1, 6):
+    #    stoploss = stoploss / 10
+    #    change_settings(stoploss, hold_stock_day_amount)
+    #    time.sleep(1)
+    #    print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
+    #    os.system('python main.py')
+    #    time.sleep(1)
+    #    result = analysis(False)
+    #    time.sleep(1)
+    #    save_settings_result(result, stoploss, hold_stock_day_amount)
+    for stoploss in range(1, 6):
+        change_settings(stoploss, hold_stock_day_amount)
+        time.sleep(1)
+        print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
+        os.system('python main.py')
+        time.sleep(1)
+        result = analysis(False)
+        time.sleep(1)
+        save_settings_result(result, stoploss, hold_stock_day_amount)
 
 
 if __name__ == '__main__':
