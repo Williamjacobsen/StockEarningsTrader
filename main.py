@@ -85,24 +85,25 @@ class analysis_utilities():
         """Gets change (%) of stock change between close of start_date and close of end_date"""
         return (float(self.stock.loc[[end_date]][end_stick]) - float(self.stock.loc[[start_date]][start_stick])) / float(self.stock.loc[[start_date]][start_stick]) * 100
 
-    def calculate_current_procent_price(self, start_date):
-        return float(self.stock.loc[[start_date]]['Close']) / 100
+    def calculate_current_procent_price(self, stick, start_date):
+        return float(self.stock.loc[[start_date]][stick]) / 100
     
-    def stop_loss(self, start_date, end_date):
-        cur_date = handle_dates().add_days_to_date(start_date, 0)
+    def stop_loss(self, stick, start_date, end_date):
+        cur_date = start_date
 
-        start_price = float(self.stock.loc[[start_date]]['Close'])
-        stop_loss_value = start_price - (self.calculate_current_procent_price(start_date) * STOPLOSS)
+        start_price = float(self.stock.loc[[start_date]][stick])
+        stop_loss_value = start_price - ((start_price / 100) * STOPLOSS)
 
-        while cur_date != end_date:
-            cur_date = handle_dates().add_days_to_date(cur_date, 1)
+        while cur_date != handle_dates().add_days_to_date(end_date, 1):
             low = float(self.stock.loc[[cur_date]]['Low'])
             _open = float(self.stock.loc[[cur_date]]['Open'])
             
             if low < stop_loss_value:
                 if _open < stop_loss_value:
-                    return self.stock_change_dates('Close', 'Open', start_date, cur_date)
+                    return self.stock_change_dates('Open', 'Open', start_date, cur_date)
                 return -STOPLOSS
+            
+            cur_date = handle_dates().add_days_to_date(cur_date, 1)
 
         return False
 
@@ -112,7 +113,7 @@ def settings():
         f.close()
     return _settings["HOLD_STOCK_DAY_AMOUNT"], _settings["STOPLOSS"], _settings["LOGGING"]
 
-def backtest_strategy():
+def backtest_strategy_buy_on_open():
     earnings_data = handle_json().read_earning_dates()
     
     for symbol in earnings_data:
@@ -124,13 +125,11 @@ def backtest_strategy():
         for date in earnings_data[symbol]:
             date = handle_dates().convert_date(date)
 
-            #start_date = handle_dates().add_days_to_date(date, 0)
-            #end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT + 1)
-            start_date = handle_dates().add_days_to_date(date, -1)
-            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT)
+            start_date = date # open
+            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
 
             try:
-                stop_loss = analysis_utilities(stock).stop_loss(start_date, end_date)
+                stop_loss = analysis_utilities(stock).stop_loss('Open', start_date, end_date)
                 if stop_loss != False:
                     total_stock_result += stop_loss
                     trades.append(stop_loss)
@@ -140,7 +139,43 @@ def backtest_strategy():
                 pass
 
             try:
-                result = analysis_utilities(stock).stock_change_dates('Close', 'Close', start_date, end_date)
+                result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
+                total_stock_result += result
+                trades.append(result)
+                print("date: " + date + " - result: " + str(result)) if LOGGING else None
+            except Exception as e:
+                pass
+        
+        handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
+        print(symbol + ": " + str(total_stock_result)) if LOGGING else None
+
+def backtest_strategy_opposition():
+    earnings_data = handle_json().read_earning_dates()
+    
+    for symbol in earnings_data:
+        stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
+        
+        total_stock_result = 0.00
+        trades = []
+
+        for date in earnings_data[symbol]:
+            date = handle_dates().convert_date(date)
+
+            start_date = date # open
+            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
+
+            try:
+                stop_loss = analysis_utilities(stock).stop_loss('Open', start_date, end_date)
+                if stop_loss != False:
+                    total_stock_result += stop_loss
+                    trades.append(stop_loss)
+                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
+                    continue
+            except Exception as e:
+                pass
+
+            try:
+                result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
                 total_stock_result += result
                 trades.append(result)
                 print("date: " + date + " - result: " + str(result)) if LOGGING else None
@@ -159,4 +194,5 @@ if __name__ == '__main__':
         else:
             os.system('clear')
 
-    backtest_strategy()
+    backtest_strategy_buy_on_open()
+    #backtest_strategy_opposition()

@@ -72,7 +72,7 @@ def analysis(logging=True):
 def save_settings_result(result, stoploss, hold_stock_day_amount):
     with open("settings_result.json", "r") as f:
         data = json.loads(f.read())
-        data["Buy before earnings report"][f"'STOPLOSS': {stoploss}, 'HOLD_STOCK_DAY_AMOUNT': {hold_stock_day_amount}"] = result
+        data["Buy on open of earnings report"][f"'STOPLOSS': {stoploss}, 'HOLD_STOCK_DAY_AMOUNT': {hold_stock_day_amount}"] = result
         f.close()
 
     with open("settings_result.json", "w") as f:
@@ -91,7 +91,7 @@ def change_settings(stoploss, hold_stock_day_amount):
         f.close()
 
 def optimize_settings():
-    hold_stock_day_amount = 0
+    hold_stock_day_amount = 1
     #for stoploss in range(1, 6):
     #    stoploss = stoploss / 10
     #    change_settings(stoploss, hold_stock_day_amount)
@@ -102,7 +102,9 @@ def optimize_settings():
     #    result = analysis(False)
     #    time.sleep(1)
     #    save_settings_result(result, stoploss, hold_stock_day_amount)
-    for stoploss in range(1, 6):
+    for stoploss in range(1, 7):
+        if stoploss == 6:
+            stoploss = 100
         change_settings(stoploss, hold_stock_day_amount)
         time.sleep(1)
         print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
