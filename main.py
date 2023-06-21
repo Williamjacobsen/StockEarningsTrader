@@ -167,6 +167,16 @@ def backtest_strategy_position_based_previous_results():
         trades = []
 
         for date in earnings_data[symbol]:
+
+            try:
+                if trades[-1] < 0 and trades[-2] < 0:
+                    if position == "long":
+                        position = "short"
+                    else:
+                        position = "long"
+            except Exception as e:
+                pass
+
             date = handle_dates().convert_date(date)
 
             start_date = date # open
@@ -177,7 +187,7 @@ def backtest_strategy_position_based_previous_results():
                 if stop_loss != False:
                     total_stock_result += stop_loss
                     trades.append(stop_loss)
-                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
+                    print("position: " + str(position) + " - date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
                     continue
             except Exception as e:
                 pass
@@ -188,7 +198,7 @@ def backtest_strategy_position_based_previous_results():
                     result = -result
                 total_stock_result += result
                 trades.append(result)
-                print("date: " + date + " - result: " + str(result)) if LOGGING else None
+                print("position: " + str(position) + " - date: " + date + " - result: " + str(result)) if LOGGING else None
             except Exception as e:
                 pass
         
@@ -196,6 +206,8 @@ def backtest_strategy_position_based_previous_results():
         print(symbol + ": " + str(total_stock_result)) if LOGGING else None
 
 def backtest_strategy_opposition():
+    """If earings move down, buy on next open"""
+    
     earnings_data = handle_json().read_earning_dates()
     
     for symbol in earnings_data:
@@ -241,5 +253,5 @@ if __name__ == '__main__':
             os.system('clear')
 
     #backtest_strategy_buy_on_open()
-    backtest_strategy_position_based_previous_results()
-    #backtest_strategy_opposition()
+    #backtest_strategy_position_based_previous_results()
+    backtest_strategy_opposition()

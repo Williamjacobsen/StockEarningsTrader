@@ -194,5 +194,79 @@
             "profit": 1433.47,
             "profit per trade": 0.39
         }
+    },
+    "Position based on previous two results": {
+        "'STOPLOSS': 1, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 45.91,
+            "stock_trades": 501,
+            "stock_wins": 230,
+            "stock_lost": 271,
+            "total_win_rate": 20.98,
+            "total_trades": 3914,
+            "total_wins": 821,
+            "total_lost": 3093,
+            "profit": 116.58,
+            "profit per trade": 0.03
+        },
+        "'STOPLOSS': 2, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 44.71,
+            "stock_trades": 501,
+            "stock_wins": 224,
+            "stock_lost": 277,
+            "total_win_rate": 35.31,
+            "total_trades": 3835,
+            "total_wins": 1354,
+            "total_lost": 2481,
+            "profit": -7.52,
+            "profit per trade": -0.0
+        },
+        "'STOPLOSS': 3, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 47.4,
+            "stock_trades": 500,
+            "stock_wins": 237,
+            "stock_lost": 263,
+            "total_win_rate": 43.32,
+            "total_trades": 3774,
+            "total_wins": 1635,
+            "total_lost": 2139,
+            "profit": -69.08,
+            "profit per trade": -0.02
+        },
+        "'STOPLOSS': 4, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 49.09,
+            "stock_trades": 497,
+            "stock_wins": 244,
+            "stock_lost": 253,
+            "total_win_rate": 48.02,
+            "total_trades": 3744,
+            "total_wins": 1798,
+            "total_lost": 1946,
+            "profit": 227.14,
+            "profit per trade": 0.06
+        },
+        "'STOPLOSS': 5, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 51.91,
+            "stock_trades": 497,
+            "stock_wins": 258,
+            "stock_lost": 239,
+            "total_win_rate": 50.13,
+            "total_trades": 3724,
+            "total_wins": 1867,
+            "total_lost": 1857,
+            "profit": 270.93,
+            "profit per trade": 0.07
+        },
+        "'STOPLOSS': 100, 'HOLD_STOCK_DAY_AMOUNT': 1": {
+            "stock_win_rate": 55.08,
+            "stock_trades": 492,
+            "stock_wins": 271,
+            "stock_lost": 221,
+            "total_win_rate": 51.96,
+            "total_trades": 3703,
+            "total_wins": 1924,
+            "total_lost": 1779,
+            "profit": 621.61,
+            "profit per trade": 0.17
+        }
     }
 }

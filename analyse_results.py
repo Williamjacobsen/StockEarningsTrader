@@ -69,10 +69,12 @@ def analysis(logging=True):
         "profit per trade": round(_profit/total_trades, 2)
     }
 
+STRATEGY = "Position based on previous two results"
+
 def save_settings_result(result, stoploss, hold_stock_day_amount):
     with open("settings_result.json", "r") as f:
         data = json.loads(f.read())
-        data["Buy on open of earnings report"][f"'STOPLOSS': {stoploss}, 'HOLD_STOCK_DAY_AMOUNT': {hold_stock_day_amount}"] = result
+        data[STRATEGY][f"'STOPLOSS': {stoploss}, 'HOLD_STOCK_DAY_AMOUNT': {hold_stock_day_amount}"] = result
         f.close()
 
     with open("settings_result.json", "w") as f:
