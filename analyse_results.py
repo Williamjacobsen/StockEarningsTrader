@@ -22,10 +22,12 @@ def total_win_rate(results):
     lost = 0
     for symbol in results:
         for trade in results[symbol]["trades"]:
-            if trade > 0:
-                wins += 1
-            elif trade < 0:
-                lost += 1
+            try:
+                if trade > 0:
+                    wins += 1
+                elif trade < 0:
+                    lost += 1
+            except Exception: pass
     return round(wins / (wins + lost) * 100, 2), wins + lost, wins, lost
 
 def profit(results):

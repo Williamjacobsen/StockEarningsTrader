@@ -67,15 +67,25 @@ class handle_json():
     def save_results(self, symbol, result):
         with open("results.json", "r") as f:
             data = json.loads(f.read())
-            data[symbol] = result
+            try:
+                data[symbol]["trades"].append(result["trades"])
+                data[symbol]["result"] = data[symbol]["result"] + result["result"]
+            except Exception:
+                data[symbol] = result
             f.close()
 
         with open("results.json", "w") as f:
             json.dump(data, f, indent=4)
             f.close()
     
+    #def read_earning_dates(self):
+    #    with open("stock_earnings.json", "r") as f:
+    #        stock_earnings = json.loads(f.read())
+    #        f.close()
+    #    return stock_earnings
+
     def read_earning_dates(self):
-        with open("stock_earnings.json", "r") as f:
+        with open("nasdaq_earnings.json", "r") as f:
             stock_earnings = json.loads(f.read())
             f.close()
         return stock_earnings
@@ -125,8 +135,39 @@ def settings():
 
 def backtest_strategy_buy_on_open():
     earnings_data = handle_json().read_earning_dates()
+
+    for data in earnings_data:
+        for _list in data:
+            date = _list['date']
+            symbol = _list['symbol']
+            marketCap = _list['marketCap']
+            
+            if marketCap == "":
+                continue
+
+            if int(marketCap[1:].replace(",", "")) > 1000000000:
+                stock = yf.download(tickers=symbol, start=handle_dates().add_days_to_date(date, -5), end=handle_dates().add_days_to_date(date, 5), interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
+        
+                total_stock_result = 0.00
+                trades = []
+
+                #date = handle_dates().convert_date(date)
+
+                start_date = date # open
+                end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
+                
+                try:
+                    result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
+                    total_stock_result += result
+                    trades.append(result)
+                    print("symbol: " + symbol + " - date: " + date + " - result: " + str(result)) if LOGGING else None
+                except Exception as e:
+                    pass
+                
+                handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
+                #print(symbol + ": " + str(total_stock_result)) if LOGGING else None
     
-    for symbol in earnings_data:
+    """for symbol in earnings_data:
         stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
         
         total_stock_result = 0.00
@@ -147,7 +188,7 @@ def backtest_strategy_buy_on_open():
                 pass
         
         handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
-        print(symbol + ": " + str(total_stock_result)) if LOGGING else None
+        print(symbol + ": " + str(total_stock_result)) if LOGGING else None"""
 
 if __name__ == '__main__':
     HOLD_STOCK_DAY_AMOUNT, STOPLOSS, LOGGING = settings()
