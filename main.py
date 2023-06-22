@@ -1,7 +1,7 @@
 import os
 import yfinance as yf
-import pandas as pd
 import json
+import datetime
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -12,7 +12,7 @@ class handle_dates():
 
         if len(str((num))) < 2:
             return "0" + str(num)
-        return num
+        return str(num)
 
     def convert_date(self, date):
         """Input: 'Jul 27, 2021', Output: '2021-7-27'"""
@@ -49,26 +49,42 @@ class handle_dates():
             "12": 31
         }
 
-        if month == 1 and days == 1 and add_days < 0:
-            return f"{year - 1}-{12}-{31}"
+        while add_days != 0:
 
-        new_days = days + add_days
-        days_in_month = month_days[self.two_digit_date(date.split('-')[1])]
+            if add_days < 0:
+                days -= 1
+            else:
+                days += 1
 
-        if new_days > days_in_month:
-            return f"{year}-{self.two_digit_date(month + 1)}-{self.two_digit_date(new_days - days_in_month)}"
+            if days > month_days[self.two_digit_date(month)]:
+                if month != 12:
+                    month += 1
+                else:
+                    month = 1
+                    year += 1
+                days = 1
+            elif days < 1:
+                if month != 1:
+                    month -= 1
+                else:
+                    month = 12
+                    year -= 1
+                days = month_days[self.two_digit_date(month)]
+            
+            if datetime.datetime(year, month, days).weekday() < 4:
+                if add_days > 0:
+                    add_days -= 1
+                else:
+                    add_days += 1
 
-        elif 1 > new_days:
-            return f"{year}-{self.two_digit_date(month - 1)}-{(month_days[self.two_digit_date(str(month - 1))]) - (-add_days - days)}"
-
-        return f"{year}-{self.two_digit_date(month)}-{self.two_digit_date(new_days)}"
+        return f"{year}-{self.two_digit_date(month)}-{self.two_digit_date(days)}"
 
 class handle_json():
     def save_results(self, symbol, result):
         with open("results.json", "r") as f:
             data = json.loads(f.read())
             try:
-                data[symbol]["trades"].append(result["trades"])
+                data[symbol]["trades"].append(result["trades"][0])
                 data[symbol]["result"] = data[symbol]["result"] + result["result"]
             except Exception:
                 data[symbol] = result
@@ -136,18 +152,25 @@ def settings():
 def backtest_strategy_buy_on_open():
     earnings_data = handle_json().read_earning_dates()
 
+    #paper_money = 1000
+    #in_trade_date = earnings_data[0][0]['date']
+
     for data in earnings_data:
         for _list in data:
+
             date = _list['date']
             symbol = _list['symbol']
             marketCap = _list['marketCap']
+
+            #if date == in_trade_date or date == handle_dates().add_days_to_date(in_trade_date, -1):
+            #    continue
             
             if marketCap == "":
                 continue
 
             if int(marketCap[1:].replace(",", "")) > 1000000000:
-                stock = yf.download(tickers=symbol, start=handle_dates().add_days_to_date(date, -5), end=handle_dates().add_days_to_date(date, 5), interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
-        
+                stock = yf.download(tickers=symbol, start=handle_dates().add_days_to_date(date, -5), end=handle_dates().add_days_to_date(date, 5), interval="1d", prepost=False, repair=True, threads=True, progress=False)
+
                 total_stock_result = 0.00
                 trades = []
 
@@ -161,11 +184,17 @@ def backtest_strategy_buy_on_open():
                     total_stock_result += result
                     trades.append(result)
                     print("symbol: " + symbol + " - date: " + date + " - result: " + str(result)) if LOGGING else None
+
+                    #in_trade_date = date
+                    #paper_money += (paper_money / 100) * result
+
+                    #print("Paper Money: " + str(paper_money))
+
+                    handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
+                    #print(symbol + ": " + str(total_stock_result)) if LOGGING else None
+
                 except Exception as e:
                     pass
-                
-                handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
-                #print(symbol + ": " + str(total_stock_result)) if LOGGING else None
     
     """for symbol in earnings_data:
         stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)

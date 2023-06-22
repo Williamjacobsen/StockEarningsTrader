@@ -103,7 +103,7 @@
         },
         {
             "date": "2023-06-14",
-            "symbol": "LEN.B",
+            "symbol": "LEN-B",
             "marketCap": "$31,023,757,505"
         },
         {
@@ -498,12 +498,12 @@
     [
         {
             "date": "2023-06-07",
-            "symbol": "BF.A",
+            "symbol": "BF-A",
             "marketCap": "$32,516,480,952"
         },
         {
             "date": "2023-06-07",
-            "symbol": "BF.B",
+            "symbol": "BF-B",
             "marketCap": "$31,783,242,693"
         },
         {
@@ -538,7 +538,7 @@
         },
         {
             "date": "2023-06-07",
-            "symbol": "GEF.B",
+            "symbol": "GEF-B",
             "marketCap": "$3,362,252,391"
         },
         {
@@ -1230,7 +1230,7 @@
         },
         {
             "date": "2023-05-30",
-            "symbol": "UHAL.B",
+            "symbol": "UHAL-B",
             "marketCap": "$9,248,994,543"
         },
         {
@@ -1571,12 +1571,12 @@
         },
         {
             "date": "2023-05-25",
-            "symbol": "LGF.A",
+            "symbol": "LGF-A",
             "marketCap": "$2,092,146,000"
         },
         {
             "date": "2023-05-25",
-            "symbol": "LGF.B",
+            "symbol": "LGF-B",
             "marketCap": "$1,963,962,000"
         },
         {
@@ -2217,7 +2217,7 @@
         },
         {
             "date": "2023-05-22",
-            "symbol": "HEI.A",
+            "symbol": "HEI-A",
             "marketCap": "$18,813,187,224"
         },
         {
@@ -5793,7 +5793,7 @@
         },
         {
             "date": "2023-05-11",
-            "symbol": "PBR.A",
+            "symbol": "PBR-A",
             "marketCap": "$87,070,043,423"
         },
         {
@@ -7990,7 +7990,7 @@
         },
         {
             "date": "2023-05-10",
-            "symbol": "GRP.U",
+            "symbol": "GRP-U",
             "marketCap": "$3,623,846,400"
         },
         {
@@ -13011,12 +13011,12 @@
     [
         {
             "date": "2023-05-06",
-            "symbol": "BRK.A",
+            "symbol": "BRK-A",
             "marketCap": "$750,815,635,570"
         },
         {
             "date": "2023-05-06",
-            "symbol": "BRK.B",
+            "symbol": "BRK-B",
             "marketCap": "$739,746,743,678"
         }
     ],
@@ -13203,7 +13203,7 @@
         },
         {
             "date": "2023-05-05",
-            "symbol": "BH.A",
+            "symbol": "BH-A",
             "marketCap": "$2,150,351,280"
         },
         {
@@ -13323,7 +13323,7 @@
         },
         {
             "date": "2023-05-05",
-            "symbol": "GTN.A",
+            "symbol": "GTN-A",
             "marketCap": "$792,415,220"
         },
         {
@@ -13875,7 +13875,7 @@
         },
         {
             "date": "2023-05-04",
-            "symbol": "BIO.B",
+            "symbol": "BIO-B",
             "marketCap": "$10,983,075,600"
         },
         {
@@ -14380,7 +14380,7 @@
         },
         {
             "date": "2023-05-04",
-            "symbol": "CWEN.A",
+            "symbol": "CWEN-A",
             "marketCap": "$3,328,650,000"
         },
         {
@@ -17397,7 +17397,7 @@
         },
         {
             "date": "2023-05-03",
-            "symbol": "CRD.A",
+            "symbol": "CRD-A",
             "marketCap": "$523,580,103"
         },
         {
@@ -17452,7 +17452,7 @@
         },
         {
             "date": "2023-05-03",
-            "symbol": "CRD.B",
+            "symbol": "CRD-B",
             "marketCap": "$455,753,790"
         },
         {
@@ -18014,7 +18014,7 @@
         },
         {
             "date": "2023-05-02",
-            "symbol": "TAP.A",
+            "symbol": "TAP-A",
             "marketCap": "$13,597,404,512"
         },
         {
@@ -18719,7 +18719,7 @@
         },
         {
             "date": "2023-05-02",
-            "symbol": "HVT.A",
+            "symbol": "HVT-A",
             "marketCap": "$459,475,147"
         },
         {
@@ -19653,12 +19653,12 @@
         },
         {
             "date": "2023-04-28",
-            "symbol": "MOG.A",
+            "symbol": "MOG-A",
             "marketCap": "$3,472,453,582"
         },
         {
             "date": "2023-04-28",
-            "symbol": "MOG.B",
+            "symbol": "MOG-B",
             "marketCap": "$3,449,201,967"
         },
         {
@@ -23049,7 +23049,7 @@
         },
         {
             "date": "2023-04-25",
-            "symbol": "AKO.B",
+            "symbol": "AKO-B",
             "marketCap": "$2,459,505,947"
         },
         {
@@ -23104,7 +23104,7 @@
         },
         {
             "date": "2023-04-25",
-            "symbol": "AKO.A",
+            "symbol": "AKO-A",
             "marketCap": "$1,890,001,938"
         },
         {
@@ -23929,7 +23929,7 @@
         },
         {
             "date": "2023-04-20",
-            "symbol": "WSO.B",
+            "symbol": "WSO-B",
             "marketCap": "$14,131,345,460"
         },
         {
@@ -26896,7 +26896,7 @@
         },
         {
             "date": "2023-03-28",
-            "symbol": "MKC.V",
+            "symbol": "MKC-V",
             "marketCap": "$24,985,786,394"
         },
         {
@@ -29921,7 +29921,7 @@
         },
         {
             "date": "2023-03-14",
-            "symbol": "LEN.B",
+            "symbol": "LEN-B",
             "marketCap": "$31,023,757,505"
         },
         {
@@ -31596,12 +31596,12 @@
     [
         {
             "date": "2023-03-08",
-            "symbol": "BF.A",
+            "symbol": "BF-A",
             "marketCap": "$32,516,480,952"
         },
         {
             "date": "2023-03-08",
-            "symbol": "BF.B",
+            "symbol": "BF-B",
             "marketCap": "$31,783,242,693"
         },
         {
@@ -31651,7 +31651,7 @@
         },
         {
             "date": "2023-03-08",
-            "symbol": "GRP.U",
+            "symbol": "GRP-U",
             "marketCap": "$3,623,846,400"
         },
         {
@@ -32605,7 +32605,7 @@
         },
         {
             "date": "2023-03-06",
-            "symbol": "CRD.A",
+            "symbol": "CRD-A",
             "marketCap": "$523,580,103"
         },
         {
@@ -32625,7 +32625,7 @@
         },
         {
             "date": "2023-03-06",
-            "symbol": "CRD.B",
+            "symbol": "CRD-B",
             "marketCap": "$455,753,790"
         },
         {
@@ -32894,7 +32894,7 @@
         },
         {
             "date": "2023-03-02",
-            "symbol": "PBR.A",
+            "symbol": "PBR-A",
             "marketCap": "$87,070,043,423"
         },
         {
@@ -33776,7 +33776,7 @@
         },
         {
             "date": "2023-03-01",
-            "symbol": "GEF.B",
+            "symbol": "GEF-B",
             "marketCap": "$3,362,252,391"
         },
         {
@@ -35495,7 +35495,7 @@
         },
         {
             "date": "2023-02-27",
-            "symbol": "HEI.A",
+            "symbol": "HEI-A",
             "marketCap": "$18,813,187,224"
         },
         {
@@ -36022,17 +36022,17 @@
     [
         {
             "date": "2023-02-25",
-            "symbol": "BRK.A",
+            "symbol": "BRK-A",
             "marketCap": "$750,815,635,570"
         },
         {
             "date": "2023-02-25",
-            "symbol": "BRK.B",
+            "symbol": "BRK-B",
             "marketCap": "$739,746,743,678"
         },
         {
             "date": "2023-02-25",
-            "symbol": "BH.A",
+            "symbol": "BH-A",
             "marketCap": "$2,150,351,280"
         },
         {
@@ -36184,7 +36184,7 @@
         },
         {
             "date": "2023-02-24",
-            "symbol": "GTN.A",
+            "symbol": "GTN-A",
             "marketCap": "$792,415,220"
         },
         {
@@ -36686,7 +36686,7 @@
         },
         {
             "date": "2023-02-23",
-            "symbol": "CWEN.A",
+            "symbol": "CWEN-A",
             "marketCap": "$3,328,650,000"
         },
         {
@@ -38660,7 +38660,7 @@
         },
         {
             "date": "2023-02-21",
-            "symbol": "TAP.A",
+            "symbol": "TAP-A",
             "marketCap": "$13,597,404,512"
         },
         {
@@ -39170,7 +39170,7 @@
         },
         {
             "date": "2023-02-21",
-            "symbol": "HVT.A",
+            "symbol": "HVT-A",
             "marketCap": "$459,475,147"
         },
         {
@@ -39384,7 +39384,7 @@
         },
         {
             "date": "2023-02-17",
-            "symbol": "AKO.B",
+            "symbol": "AKO-B",
             "marketCap": "$2,459,505,947"
         },
         {
@@ -39404,7 +39404,7 @@
         },
         {
             "date": "2023-02-17",
-            "symbol": "AKO.A",
+            "symbol": "AKO-A",
             "marketCap": "$1,890,001,938"
         },
         {
@@ -39556,7 +39556,7 @@
         },
         {
             "date": "2023-02-16",
-            "symbol": "WSO.B",
+            "symbol": "WSO-B",
             "marketCap": "$14,131,345,460"
         },
         {
@@ -39601,7 +39601,7 @@
         },
         {
             "date": "2023-02-16",
-            "symbol": "BIO.B",
+            "symbol": "BIO-B",
             "marketCap": "$10,983,075,600"
         },
         {
@@ -42496,7 +42496,7 @@
         },
         {
             "date": "2023-02-09",
-            "symbol": "LGF.A",
+            "symbol": "LGF-A",
             "marketCap": "$2,092,146,000"
         },
         {
@@ -42506,7 +42506,7 @@
         },
         {
             "date": "2023-02-09",
-            "symbol": "LGF.B",
+            "symbol": "LGF-B",
             "marketCap": "$1,963,962,000"
         },
         {
@@ -43038,7 +43038,7 @@
         },
         {
             "date": "2023-02-08",
-            "symbol": "UHAL.B",
+            "symbol": "UHAL-B",
             "marketCap": "$9,248,994,543"
         },
         {
@@ -44599,12 +44599,12 @@
         },
         {
             "date": "2023-02-03",
-            "symbol": "MOG.A",
+            "symbol": "MOG-A",
             "marketCap": "$3,472,453,582"
         },
         {
             "date": "2023-02-03",
-            "symbol": "MOG.B",
+            "symbol": "MOG-B",
             "marketCap": "$3,449,201,967"
         },
         {
@@ -46821,7 +46821,7 @@
         },
         {
             "date": "2023-01-26",
-            "symbol": "MKC.V",
+            "symbol": "MKC-V",
             "marketCap": "$24,985,786,394"
         },
         {
@@ -49697,7 +49697,7 @@
         },
         {
             "date": "2022-12-19",
-            "symbol": "HEI.A",
+            "symbol": "HEI-A",
             "marketCap": "$18,813,187,224"
         },
         {
@@ -49893,7 +49893,7 @@
         },
         {
             "date": "2022-12-14",
-            "symbol": "LEN.B",
+            "symbol": "LEN-B",
             "marketCap": "$31,023,757,505"
         },
         {
@@ -50208,12 +50208,12 @@
     [
         {
             "date": "2022-12-07",
-            "symbol": "BF.A",
+            "symbol": "BF-A",
             "marketCap": "$32,516,480,952"
         },
         {
             "date": "2022-12-07",
-            "symbol": "BF.B",
+            "symbol": "BF-B",
             "marketCap": "$31,783,242,693"
         },
         {
@@ -50258,7 +50258,7 @@
         },
         {
             "date": "2022-12-07",
-            "symbol": "GEF.B",
+            "symbol": "GEF-B",
             "marketCap": "$3,362,252,391"
         },
         {
@@ -57682,7 +57682,7 @@
         },
         {
             "date": "2022-11-09",
-            "symbol": "GRP.U",
+            "symbol": "GRP-U",
             "marketCap": "$3,623,846,400"
         },
         {
@@ -60224,7 +60224,7 @@
         },
         {
             "date": "2022-11-08",
-            "symbol": "CRD.A",
+            "symbol": "CRD-A",
             "marketCap": "$523,580,103"
         },
         {
@@ -60264,7 +60264,7 @@
         },
         {
             "date": "2022-11-08",
-            "symbol": "CRD.B",
+            "symbol": "CRD-B",
             "marketCap": "$455,753,790"
         },
         {
@@ -62308,12 +62308,12 @@
     [
         {
             "date": "2022-11-05",
-            "symbol": "BRK.A",
+            "symbol": "BRK-A",
             "marketCap": "$750,815,635,570"
         },
         {
             "date": "2022-11-05",
-            "symbol": "BRK.B",
+            "symbol": "BRK-B",
             "marketCap": "$739,746,743,678"
         }
     ],
@@ -62520,12 +62520,12 @@
         },
         {
             "date": "2022-11-04",
-            "symbol": "MOG.A",
+            "symbol": "MOG-A",
             "marketCap": "$3,472,453,582"
         },
         {
             "date": "2022-11-04",
-            "symbol": "MOG.B",
+            "symbol": "MOG-B",
             "marketCap": "$3,449,201,967"
         },
         {
@@ -62555,7 +62555,7 @@
         },
         {
             "date": "2022-11-04",
-            "symbol": "BH.A",
+            "symbol": "BH-A",
             "marketCap": "$2,150,351,280"
         },
         {
@@ -62630,7 +62630,7 @@
         },
         {
             "date": "2022-11-04",
-            "symbol": "GTN.A",
+            "symbol": "GTN-A",
             "marketCap": "$792,415,220"
         },
         {
@@ -62777,7 +62777,7 @@
         },
         {
             "date": "2022-11-03",
-            "symbol": "PBR.A",
+            "symbol": "PBR-A",
             "marketCap": "$87,070,043,423"
         },
         {
@@ -63832,7 +63832,7 @@
         },
         {
             "date": "2022-11-03",
-            "symbol": "LGF.A",
+            "symbol": "LGF-A",
             "marketCap": "$2,092,146,000"
         },
         {
@@ -63847,7 +63847,7 @@
         },
         {
             "date": "2022-11-03",
-            "symbol": "LGF.B",
+            "symbol": "LGF-B",
             "marketCap": "$1,963,962,000"
         },
         {
@@ -66004,7 +66004,7 @@
         },
         {
             "date": "2022-11-02",
-            "symbol": "CWEN.A",
+            "symbol": "CWEN-A",
             "marketCap": "$3,328,650,000"
         },
         {
@@ -67421,7 +67421,7 @@
         },
         {
             "date": "2022-11-01",
-            "symbol": "TAP.A",
+            "symbol": "TAP-A",
             "marketCap": "$13,597,404,512"
         },
         {
@@ -68156,7 +68156,7 @@
         },
         {
             "date": "2022-11-01",
-            "symbol": "HVT.A",
+            "symbol": "HVT-A",
             "marketCap": "$459,475,147"
         },
         {
@@ -69649,7 +69649,7 @@
         },
         {
             "date": "2022-10-27",
-            "symbol": "BIO.B",
+            "symbol": "BIO-B",
             "marketCap": "$10,983,075,600"
         },
         {
@@ -72298,7 +72298,7 @@
         },
         {
             "date": "2022-10-25",
-            "symbol": "AKO.B",
+            "symbol": "AKO-B",
             "marketCap": "$2,459,505,947"
         },
         {
@@ -72353,7 +72353,7 @@
         },
         {
             "date": "2022-10-25",
-            "symbol": "AKO.A",
+            "symbol": "AKO-A",
             "marketCap": "$1,890,001,938"
         },
         {
@@ -73206,7 +73206,7 @@
         },
         {
             "date": "2022-10-20",
-            "symbol": "WSO.B",
+            "symbol": "WSO-B",
             "marketCap": "$14,131,345,460"
         },
         {
@@ -74404,7 +74404,7 @@
         },
         {
             "date": "2022-10-06",
-            "symbol": "MKC.V",
+            "symbol": "MKC-V",
             "marketCap": "$24,985,786,394"
         },
         {
@@ -74989,7 +74989,7 @@
         },
         {
             "date": "2022-09-21",
-            "symbol": "LEN.B",
+            "symbol": "LEN-B",
             "marketCap": "$31,023,757,505"
         },
         {
@@ -76005,7 +76005,7 @@
     [
         {
             "date": "2022-08-31",
-            "symbol": "BF.A",
+            "symbol": "BF-A",
             "marketCap": "$32,516,480,952"
         },
         {
@@ -76015,7 +76015,7 @@
         },
         {
             "date": "2022-08-31",
-            "symbol": "BF.B",
+            "symbol": "BF-B",
             "marketCap": "$31,783,242,693"
         },
         {
@@ -76070,7 +76070,7 @@
         },
         {
             "date": "2022-08-31",
-            "symbol": "GEF.B",
+            "symbol": "GEF-B",
             "marketCap": "$3,362,252,391"
         },
         {
@@ -76339,7 +76339,7 @@
         },
         {
             "date": "2022-08-29",
-            "symbol": "HEI.A",
+            "symbol": "HEI-A",
             "marketCap": "$18,813,187,224"
         },
         {
@@ -82095,7 +82095,7 @@
         },
         {
             "date": "2022-08-10",
-            "symbol": "GRP.U",
+            "symbol": "GRP-U",
             "marketCap": "$3,623,846,400"
         },
         {
@@ -85559,7 +85559,7 @@
         },
         {
             "date": "2022-08-08",
-            "symbol": "CRD.A",
+            "symbol": "CRD-A",
             "marketCap": "$523,580,103"
         },
         {
@@ -85609,7 +85609,7 @@
         },
         {
             "date": "2022-08-08",
-            "symbol": "CRD.B",
+            "symbol": "CRD-B",
             "marketCap": "$455,753,790"
         },
         {
@@ -86231,12 +86231,12 @@
     [
         {
             "date": "2022-08-06",
-            "symbol": "BRK.A",
+            "symbol": "BRK-A",
             "marketCap": "$750,815,635,570"
         },
         {
             "date": "2022-08-06",
-            "symbol": "BRK.B",
+            "symbol": "BRK-B",
             "marketCap": "$739,746,743,678"
         }
     ],
@@ -86383,7 +86383,7 @@
         },
         {
             "date": "2022-08-05",
-            "symbol": "BH.A",
+            "symbol": "BH-A",
             "marketCap": "$2,150,351,280"
         },
         {
@@ -86493,7 +86493,7 @@
         },
         {
             "date": "2022-08-05",
-            "symbol": "GTN.A",
+            "symbol": "GTN-A",
             "marketCap": "$792,415,220"
         },
         {
@@ -87900,7 +87900,7 @@
         },
         {
             "date": "2022-08-04",
-            "symbol": "LGF.A",
+            "symbol": "LGF-A",
             "marketCap": "$2,092,146,000"
         },
         {
@@ -87925,7 +87925,7 @@
         },
         {
             "date": "2022-08-04",
-            "symbol": "LGF.B",
+            "symbol": "LGF-B",
             "marketCap": "$1,963,962,000"
         },
         {
@@ -91769,7 +91769,7 @@
         },
         {
             "date": "2022-08-02",
-            "symbol": "TAP.A",
+            "symbol": "TAP-A",
             "marketCap": "$13,597,404,512"
         },
         {
@@ -92054,7 +92054,7 @@
         },
         {
             "date": "2022-08-02",
-            "symbol": "CWEN.A",
+            "symbol": "CWEN-A",
             "marketCap": "$3,328,650,000"
         },
         {
@@ -92494,7 +92494,7 @@
         },
         {
             "date": "2022-08-02",
-            "symbol": "HVT.A",
+            "symbol": "HVT-A",
             "marketCap": "$459,475,147"
         },
         {
@@ -93503,12 +93503,12 @@
         },
         {
             "date": "2022-07-29",
-            "symbol": "MOG.A",
+            "symbol": "MOG-A",
             "marketCap": "$3,472,453,582"
         },
         {
             "date": "2022-07-29",
-            "symbol": "MOG.B",
+            "symbol": "MOG-B",
             "marketCap": "$3,449,201,967"
         },
         {
@@ -93785,7 +93785,7 @@
         },
         {
             "date": "2022-07-28",
-            "symbol": "PBR.A",
+            "symbol": "PBR-A",
             "marketCap": "$87,070,043,423"
         },
         {
@@ -94145,7 +94145,7 @@
         },
         {
             "date": "2022-07-28",
-            "symbol": "BIO.B",
+            "symbol": "BIO-B",
             "marketCap": "$10,983,075,600"
         },
         {
@@ -96864,7 +96864,7 @@
         },
         {
             "date": "2022-07-26",
-            "symbol": "WSO.B",
+            "symbol": "WSO-B",
             "marketCap": "$14,131,345,460"
         },
         {
@@ -97074,7 +97074,7 @@
         },
         {
             "date": "2022-07-26",
-            "symbol": "AKO.B",
+            "symbol": "AKO-B",
             "marketCap": "$2,459,505,947"
         },
         {
@@ -97119,7 +97119,7 @@
         },
         {
             "date": "2022-07-26",
-            "symbol": "AKO.A",
+            "symbol": "AKO-A",
             "marketCap": "$1,890,001,938"
         },
         {
@@ -99659,7 +99659,7 @@
         },
         {
             "date": "2022-06-29",
-            "symbol": "MKC.V",
+            "symbol": "MKC-V",
             "marketCap": "$24,985,786,394"
         },
         {
@@ -100071,7 +100071,7 @@
         },
         {
             "date": "2022-06-21",
-            "symbol": "LEN.B",
+            "symbol": "LEN-B",
             "marketCap": "$31,023,757,505"
         },
         {
