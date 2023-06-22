@@ -318,5 +318,33 @@
             "profit": 219.18,
             "profit per trade": 0.06
         }
+    },
+    "Buy open and sell next open": {
+        "'STOPLOSS': 100, 'HOLD_STOCK_DAY_AMOUNT': 0": {
+            "stock_win_rate": 58.94,
+            "stock_trades": 492,
+            "stock_wins": 290,
+            "stock_lost": 202,
+            "total_win_rate": 52.12,
+            "total_trades": 3705,
+            "total_wins": 1931,
+            "total_lost": 1774,
+            "profit": 748.49,
+            "profit per trade": 0.2
+        }
+    },
+    "Buy open and sell next open based on previous three trades": {
+        "'STOPLOSS': 100, 'HOLD_STOCK_DAY_AMOUNT': 0": {
+            "stock_win_rate": 57.11,
+            "stock_trades": 492,
+            "stock_wins": 281,
+            "stock_lost": 211,
+            "total_win_rate": 51.88,
+            "total_trades": 3705,
+            "total_wins": 1922,
+            "total_lost": 1783,
+            "profit": 559.41,
+            "profit per trade": 0.15
+        }
     }
 }

@@ -69,7 +69,7 @@ def analysis(logging=True):
         "profit per trade": round(_profit/total_trades, 2)
     }
 
-STRATEGY = "Trade opposition"
+STRATEGY = "Buy open and sell next open based on previous three trades"
 
 def save_settings_result(result, stoploss, hold_stock_day_amount):
     with open("settings_result.json", "r") as f:
@@ -105,26 +105,26 @@ def optimize_settings():
     #    result = analysis(False)
     #    time.sleep(1)
     #    save_settings_result(result, stoploss, hold_stock_day_amount)
-    for stoploss in range(1, 6):
-        #if stoploss == 6:
-        #    stoploss = 100
-        change_settings(stoploss, hold_stock_day_amount)
-        time.sleep(1)
-        print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
-        os.system('python main.py')
-        time.sleep(1)
-        result = analysis(False)
-        time.sleep(1)
-        save_settings_result(result, stoploss, hold_stock_day_amount)
+    #for stoploss in range(1, 7):
+    #    if stoploss == 6:
+    #        stoploss = 100
+    #    change_settings(stoploss, hold_stock_day_amount)
+    #    time.sleep(1)
+    #    print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
+    #    os.system('python main.py')
+    #    time.sleep(1)
+    #    result = analysis(False)
+    #    time.sleep(1)
+    #    save_settings_result(result, stoploss, hold_stock_day_amount)
 
-    #change_settings(stoploss, hold_stock_day_amount)
-    #time.sleep(1)
-    #print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
-    #os.system('python main.py')
-    #time.sleep(1)
-    #result = analysis(False)
-    #time.sleep(1)
-    #save_settings_result(result, stoploss, hold_stock_day_amount)
+    change_settings(stoploss, hold_stock_day_amount)
+    time.sleep(1)
+    print(f"running [STOPLOSS: {stoploss}] & [HOLD_STOCK_DAY_AMOUNT: {hold_stock_day_amount}]")
+    os.system('python main.py')
+    time.sleep(1)
+    result = analysis(False)
+    time.sleep(1)
+    save_settings_result(result, stoploss, hold_stock_day_amount)
 
 
 if __name__ == '__main__':
