@@ -49,14 +49,17 @@ class handle_dates():
             "12": 31
         }
 
+        if month == 1 and days == 1 and add_days < 0:
+            return f"{year - 1}-{12}-{31}"
+
         new_days = days + add_days
         days_in_month = month_days[self.two_digit_date(date.split('-')[1])]
 
         if new_days > days_in_month:
             return f"{year}-{self.two_digit_date(month + 1)}-{self.two_digit_date(new_days - days_in_month)}"
 
-        elif 0 > new_days:
-            return f"{year}-{self.two_digit_date(month - 1)}-{(month_days[self.two_digit_date(month - 1)]) - (-add_days - days)}"
+        elif 1 > new_days:
+            return f"{year}-{self.two_digit_date(month - 1)}-{(month_days[self.two_digit_date(str(month - 1))]) - (-add_days - days)}"
 
         return f"{year}-{self.two_digit_date(month)}-{self.two_digit_date(new_days)}"
 
