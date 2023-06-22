@@ -128,4 +128,5 @@ def optimize_settings():
 
 
 if __name__ == '__main__':
-    optimize_settings()
+    #optimize_settings()
+    analysis()

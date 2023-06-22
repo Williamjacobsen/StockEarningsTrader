@@ -136,72 +136,10 @@ def backtest_strategy_buy_on_open():
             end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
 
             try:
-                stop_loss = analysis_utilities(stock).stop_loss('Open', start_date, end_date)
-                if stop_loss != False:
-                    total_stock_result += stop_loss
-                    trades.append(stop_loss)
-                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
-                    continue
-            except Exception as e:
-                pass
-
-            try:
                 result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
                 total_stock_result += result
                 trades.append(result)
                 print("date: " + date + " - result: " + str(result)) if LOGGING else None
-            except Exception as e:
-                pass
-        
-        handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
-        print(symbol + ": " + str(total_stock_result)) if LOGGING else None
-
-def backtest_strategy_buy_open_sell_next_open_based_previous_trades():
-    earnings_data = handle_json().read_earning_dates()
-    
-    for symbol in earnings_data:
-        stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
-        
-        position = "long"
-        total_stock_result = 0.00
-        trades = []
-        last_pos_changed = False
-
-        for date in earnings_data[symbol]:
-            date = handle_dates().convert_date(date)
-
-            start_date = date # open
-            end_date = handle_dates().add_days_to_date(date, 1) # open
-
-            try:
-                if not last_pos_changed:
-                    if trades[-3] < 0 and trades[-2] < 0 and trades[-1] < 0:
-                        if position == "long":
-                            position = "short"
-                        else:
-                            position = "long"
-                        last_pos_changed = True
-                else:
-                    last_pos_changed = False
-            except Exception:
-                pass
-
-            try:
-                
-                stop_loss = analysis_utilities(stock).stop_loss(position, 'Open', start_date, end_date)
-                if stop_loss != False:
-                    total_stock_result += stop_loss
-                    trades.append(stop_loss)
-                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
-                    continue
-
-                result = analysis_utilities(stock).stock_change_dates('Open', 'Open', start_date, end_date)
-                if position == "short":
-                    result = -result
-                total_stock_result += result
-                trades.append(result)
-                print("position: " + position + " - date: " + date + " - result: " + str(result)) if LOGGING else None
-            
             except Exception as e:
                 pass
         
@@ -217,4 +155,4 @@ if __name__ == '__main__':
         else:
             os.system('clear')
 
-    backtest_strategy_buy_open_sell_next_open_based_previous_trades()
+    backtest_strategy_buy_on_open()
