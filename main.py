@@ -82,7 +82,7 @@ class analysis_utilities():
         self.stock = stock
 
     def stock_change_dates(self, start_stick, end_stick, start_date, end_date):
-        """Gets change (%) of stock change between close of start_date and close of end_date"""
+        """Gets change (%) of stock change between start_stick of start_date and end_stick of end_date"""
         return (float(self.stock.loc[[end_date]][end_stick]) - float(self.stock.loc[[start_date]][start_stick])) / float(self.stock.loc[[start_date]][start_stick]) * 100
 
     def calculate_current_procent_price(self, stick, start_date):
@@ -213,30 +213,35 @@ def backtest_strategy_opposition():
     for symbol in earnings_data:
         stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
         
+        position = "long"
         total_stock_result = 0.00
         trades = []
 
         for date in earnings_data[symbol]:
             date = handle_dates().convert_date(date)
 
-            start_date = date # open
-            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
-
             try:
-                stop_loss = analysis_utilities(stock).stop_loss('Open', start_date, end_date)
+
+                if 0 > analysis_utilities(stock).stock_change_dates('Open', 'Close', date, date):
+                    position = "long"
+                elif 0 < analysis_utilities(stock).stock_change_dates('Open', 'Close', date, date):
+                    position = "short"
+
+                stop_loss = analysis_utilities(stock).stop_loss(position, 'Open', handle_dates().add_days_to_date(date, 1), handle_dates().add_days_to_date(date, 1))
                 if stop_loss != False:
                     total_stock_result += stop_loss
                     trades.append(stop_loss)
-                    print("date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
+                    print("position: " + str(position) + " - date: " + date + " - stop loss: " + str(stop_loss)) if LOGGING else None
                     continue
-            except Exception as e:
-                pass
 
-            try:
-                result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
+
+                result = analysis_utilities(stock).stock_change_dates('Open', 'Close', handle_dates().add_days_to_date(date, 1), handle_dates().add_days_to_date(date, 1))
+                if position == "short":
+                    result = -result
                 total_stock_result += result
                 trades.append(result)
-                print("date: " + date + " - result: " + str(result)) if LOGGING else None
+                print("position: " + str(position) + " - date: " + date + " - result: " + str(result)) if LOGGING else None
+            
             except Exception as e:
                 pass
         
@@ -254,4 +259,4 @@ if __name__ == '__main__':
 
     #backtest_strategy_buy_on_open()
     #backtest_strategy_position_based_previous_results()
-    backtest_strategy_opposition()
+    #backtest_strategy_opposition()
