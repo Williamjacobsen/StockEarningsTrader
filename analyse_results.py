@@ -132,3 +132,22 @@ def optimize_settings():
 if __name__ == '__main__':
     #optimize_settings()
     analysis()
+
+
+"""
+stock_win_rate: 57.94%
+stock_trades: 2423
+stock_wins: 1404
+stock_lost: 1019
+
+total_win_rate: 53.55%
+total_trades: 9279
+total_wins: 4969
+total_lost: 4310
+
+profit: 6312.67%
+profit per trade: 0.68%
+
+growth: 30%
+paper_money: 1000 -> 1300.42
+"""

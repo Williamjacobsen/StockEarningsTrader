@@ -152,12 +152,22 @@ def settings():
 def backtest_strategy_buy_on_open():
     earnings_data = handle_json().read_earning_dates()
 
-    #paper_money = 1000
-    #in_trade_date = earnings_data[0][0]['date']
+    paper_money = 1000
 
     for data in earnings_data:
-        for _list in data:
 
+        _len = 0
+        for _list in data:
+            date = _list['date']
+            marketCap = _list['marketCap']
+            
+            if marketCap == "":
+                continue
+            
+            if int(marketCap[1:].replace(",", "")) > 1000000000:
+                _len += 1
+
+        for _list in data:
             date = _list['date']
             symbol = _list['symbol']
             marketCap = _list['marketCap']
@@ -174,8 +184,6 @@ def backtest_strategy_buy_on_open():
                 total_stock_result = 0.00
                 trades = []
 
-                #date = handle_dates().convert_date(date)
-
                 start_date = date # open
                 end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
                 
@@ -185,40 +193,14 @@ def backtest_strategy_buy_on_open():
                     trades.append(result)
                     print("symbol: " + symbol + " - date: " + date + " - result: " + str(result)) if LOGGING else None
 
-                    #in_trade_date = date
-                    #paper_money += (paper_money / 100) * result
-
-                    #print("Paper Money: " + str(paper_money))
-
                     handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
                     #print(symbol + ": " + str(total_stock_result)) if LOGGING else None
-
+                    
+                    paper_money += ((paper_money / _len) / 100) * total_stock_result
+                    print("paper_money: " + str(paper_money))
                 except Exception as e:
                     pass
     
-    """for symbol in earnings_data:
-        stock = yf.download(tickers=symbol, period="3y", interval="1d", prepost=False, repair=True, threads=True, progress=LOGGING)
-        
-        total_stock_result = 0.00
-        trades = []
-
-        for date in earnings_data[symbol]:
-            date = handle_dates().convert_date(date)
-
-            start_date = date # open
-            end_date = handle_dates().add_days_to_date(date, HOLD_STOCK_DAY_AMOUNT) # close
-
-            try:
-                result = analysis_utilities(stock).stock_change_dates('Open', 'Close', start_date, end_date)
-                total_stock_result += result
-                trades.append(result)
-                print("date: " + date + " - result: " + str(result)) if LOGGING else None
-            except Exception as e:
-                pass
-        
-        handle_json().save_results(symbol, {"result": total_stock_result, "trades": trades})
-        print(symbol + ": " + str(total_stock_result)) if LOGGING else None"""
-
 if __name__ == '__main__':
     HOLD_STOCK_DAY_AMOUNT, STOPLOSS, LOGGING = settings()
 
